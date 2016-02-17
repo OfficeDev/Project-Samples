@@ -9,9 +9,9 @@ To use this Project Online ReST code sample, you need the following:
 * Visual Studio or other .Net IDE
 
 ###Modules
-* [CreateProject](/CreateUpdateProjectSample/CreateProject.cs)
-* [UpdateProject](/CreateUpdateProjectSample/UpdateProject.cs)
-* [UpdateProjectCustomFields](/CreateUpdateProjectSample/UpdateProjectCustomFieldValues.cs)
+* [CreateProject](/CreateUpdateProjectSample/CreateUpdateProjectSample/CreateProject.cs)
+* [UpdateProject](/CreateUpdateProjectSample/CreateUpdateProjectSample/UpdateProject.cs)
+* [UpdateProjectCustomFields](/CreateUpdateProjectSample/CreateUpdateProjectSample/UpdateProjectCustomFieldValues.cs)
 
 ##How the sample affects your tenant data
 This sample runs CSOM methods that create, read, update, or delete data. When running commands that delete or edit data, the sample creates sample data. The sample data is created or edited so that your actual tenant data is unaffected.
