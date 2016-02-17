@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A2FB1CA-65BB-47A3-9198-E036580662B9}</ProjectGuid>
+    <ProjectGuid>{5E250613-BC28-448D-AF0E-7C554B3CD4DF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CreateUpdateProjectSample</RootNamespace>
@@ -33,15 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ProjectServer.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.ProjectServer.Client">
       <HintPath>..\dll\Microsoft.ProjectServer.Client.dll</HintPath>
     </Reference>
-    <Reference Include="microsoft.sharepoint.client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="microsoft.sharepoint.client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\microsoft.sharepoint.client.dll</HintPath>
     </Reference>
-    <Reference Include="microsoft.sharepoint.client.runtime, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="microsoft.sharepoint.client.runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\microsoft.sharepoint.client.runtime.dll</HintPath>
     </Reference>
@@ -55,10 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateUpdateProjectSample.cs" />
-    <Compile Include="UpdateProject.cs" />
     <Compile Include="CreateProject.cs" />
+    <Compile Include="CreateUpdateProjectSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateProject.cs" />
     <Compile Include="UpdateProjectCustomFieldValues.cs" />
   </ItemGroup>
   <ItemGroup>
