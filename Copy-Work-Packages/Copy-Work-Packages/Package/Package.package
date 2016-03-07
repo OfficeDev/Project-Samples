@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="f95854a2-2eee-4ece-8f44-767b6f7a59ad" 
+        solutionId="f95854a2-2eee-4ece-8f44-767b6f7a59ad" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="CopyWorkPackages"
+        sharePointProductVersion="16.0">
+  <features>
+        <featureReference itemId="cc7c3c83-31cd-49c5-a603-45e014131795" />
+  </features>
+</package>

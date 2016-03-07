@@ -1,0 +1,16 @@
+﻿/* Place custom styles below */
+      .boxer {
+      display: table;
+      border-collapse: collapse;
+      padding: 5px;
+      }
+      .boxer .box-row {
+      display: table-row;
+      }
+      .boxer .box {
+      display: table-cell;
+      text-align: left;
+      vertical-align: top;
+      border: 0px;
+      padding: 5px;
+      }
