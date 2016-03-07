@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ProjectServer.Client">
-      <HintPath>..\dll\Microsoft.ProjectServer.Client.dll</HintPath>
+      <HintPath>dll\Microsoft.ProjectServer.Client.dll</HintPath>
     </Reference>
     <Reference Include="microsoft.sharepoint.client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
