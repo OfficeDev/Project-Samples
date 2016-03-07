@@ -5,7 +5,7 @@ The create and update sample code demonstrates how to create and update a projec
 ###Prerequisites
 To use this Project Online ReST code sample, you need the following:
 * An Office 365 tenant with a Project license
-* The SharePoint client runtime and Project .Net library. It is available as a Nuget Package from [here](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/)
+* The SharePoint client runtime and Project .Net libraries. It is available as a Nuget Package from [here](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/)
 * Visual Studio or other .Net IDE
 
 ###Modules
@@ -15,12 +15,6 @@ To use this Project Online ReST code sample, you need the following:
 
 ##How the sample affects your tenant data
 This sample runs CSOM methods that create, read, update, or delete data. When running commands that delete or edit data, the sample creates sample data. The sample data is created or edited so that your actual tenant data is unaffected.
-
-## Questions and comments
-Please add the latest libraries into dll folder as references before running the sample. 
-Download the latest nuget package for libraries online at [this website] (https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/).
-How to add a reference please see [this link] (https://msdn.microsoft.com/en-us/library/7314433t(v=vs.90).aspx).
-
 
 ## Additional resources
 * [Client-side object model (CSOM) for Project 2013] (https://msdn.microsoft.com/en-us/library/office/jj163123.aspx)
