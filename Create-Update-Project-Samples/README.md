@@ -1,6 +1,6 @@
-# Office 365 Project Online .NET Code Sample
+# Create and Update Project .Net Code Samples
 
-This Project Online .NET code sample demonstrates how to create and update a project using CSOM 
+The create and update sample code demonstrates how to create and update a project using CSOM and .Net
 
 ###Prerequisites
 To use this Project Online ReST code sample, you need the following:
@@ -11,14 +11,16 @@ To use this Project Online ReST code sample, you need the following:
 ###Modules
 * [CreateProject](/Create-Update-Project-Samples/Create-Update-Project-Samples/CreateProject.cs)
 * [UpdateProject](/Create-Update-Project-Samples/Create-Update-Project-Samples/UpdateProject.cs)
-* [UpdateProjectCustomFields](/Create-Update-Project-Samples/CreateUpdateProjectSample/UpdateProjectCustomFieldValues.cs)
+* [UpdateProjectCustomFields](/Create-Update-Project-Samples/Create-Update-Project-Samples/UpdateProjectCustomFieldValues.cs)
 
 ##How the sample affects your tenant data
 This sample runs CSOM methods that create, read, update, or delete data. When running commands that delete or edit data, the sample creates sample data. The sample data is created or edited so that your actual tenant data is unaffected.
 
 ## Questions and comments
-Please add the libraries in dll folder before running the sample. Or download the latest ones online(address in Addtional resources). How to add a reference please see
-(https://msdn.microsoft.com/en-us/library/7314433t(v=vs.90).aspx)
+Please add the latest libraries into dll folder as references before running the sample. 
+Download the latest nuget package for libraries online at [this website] (https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/).
+How to add a reference please see [this link] (https://msdn.microsoft.com/en-us/library/7314433t(v=vs.90).aspx).
+
 
 ## Additional resources
 * [PS namespace (ps.js)] (https://msdn.microsoft.com/en-us/library/office/jj669820.aspx)
