@@ -5,7 +5,7 @@ The create and update sample code demonstrates how to create and update a projec
 ###Prerequisites
 To use this Project Online ReST code sample, you need the following:
 * An Office 365 tenant with a Project license
-* The SharePoint client runtime and Project C# library (included in dll folder)
+* The SharePoint client runtime and Project .Net library. It is available as a Nuget Package from [here](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/)
 * Visual Studio or other .Net IDE
 
 ###Modules
@@ -23,7 +23,6 @@ How to add a reference please see [this link] (https://msdn.microsoft.com/en-us/
 
 
 ## Additional resources
-* [PS namespace (ps.js)] (https://msdn.microsoft.com/en-us/library/office/jj669820.aspx)
 * [Client-side object model (CSOM) for Project 2013] (https://msdn.microsoft.com/en-us/library/office/jj163123.aspx)
 * [Project 2013 SDK] (https://www.microsoft.com/en-us/download/details.aspx?id=30435)
 * [SharePoint Online SDK] (https://www.microsoft.com/en-us/download/details.aspx?id=42038)
