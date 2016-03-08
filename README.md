@@ -4,9 +4,10 @@
 
 ## Samples
 
-* Copy-Work-Packages: How to copy tasks from one project to another using JSOM
-* Create-Update-Project-Samples: How to create and update a project using CSOM and .Net
-* My-Task-Checklist: How to update the status of assignments for the logged in user using C#
+* [O365-Project-Online-REST-Samples](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/O365-Project-Online-REST-Samples):How to create and update a project using ReST API
+* [Copy-Work-Packages](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/Copy-Work-Packages): How to copy tasks from one project to another using JSOM
+* [Create-Update-Project-Samples](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/Create-Update-Project-Samples) : How to create and update a project using CSOM and .Net
+* [My-Task-Checklist](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/My-Task-Checklist): How to update the status of assignments for the logged in user using C#
 
 
 
