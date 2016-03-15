@@ -66,7 +66,7 @@ $body = "{
 # ReST request to create an enterprise resource
 Post-ReSTRequest $SiteUrl "ProjectServer/EnterpriseResources/Add" $body
 
-# ReST request to add an enterprise resource
+# ReST request to add an enterprise resource to the project team
 Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/ProjectResources/AddEnterpriseResourceById('$enterprise_resourceid')"
 
 # Assignment parameters as JSON payload
