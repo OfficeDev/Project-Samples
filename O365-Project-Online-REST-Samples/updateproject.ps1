@@ -22,10 +22,10 @@ Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/checkOut" $null
 $body = "{'Description':'Updated from PowerShell using REST API'}"
 Patch-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft" $body
 
-# ReST request to update the task duration
+# ReST request to update the task duration and start date
 if (-not [String]::IsNullOrEmpty($taskId))
 {
-	$body = "{'Duration':'10d'}"
+	$body = "{'Duration':'10d','Start':'2016-01-06T08:00:00'}"
 	Patch-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/Tasks('$taskId')" $body
 }
 
@@ -36,10 +36,10 @@ if (-not [String]::IsNullOrEmpty($resourceId))
 	Patch-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/ProjectResources('$resourceId')" $body
 }
 
-# ReST request to update the assignment completion percent
+# ReST request to update the assignment completion and work
 if (-not [String]::IsNullOrEmpty($assignmentId))
 {
-	$body = "{'PercentWorkComplete':'50'}"
+	$body = "{'PercentWorkComplete':'50','ActualWork':'10h'}"
 	Patch-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/Assignments('$assignmentId')" $body
 }
 

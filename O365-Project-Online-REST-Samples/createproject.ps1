@@ -33,7 +33,9 @@ $body = "{
 	'parameters': {
 		'Id': '$taskid',
 		'Name': 'Task_$taskid',
-		'Notes': 'Created from PowerShell using REST API'
+		'Notes': 'Created from PowerShell using REST API',
+		'Start': '2016-01-04T08:00:00',
+		'Duration': '5d'        
 	}
 }"
 
@@ -49,8 +51,23 @@ $body = "{
 	}
 }"
 
-# ReST request to create local a resource
-$result = Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/ProjectResources/Add" $body
+# ReST request to create a local resource
+Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/ProjectResources/Add" $body
+
+# Enterprise resource parameters as JSON payload
+$enterprise_resourceid = [Guid]::NewGuid()
+$body = "{
+	'parameters': {
+		'Id': '$enterprise_resourceid',
+		'Name': 'EnterpriseResource_$enterprise_resourceid'
+	}
+}"
+
+# ReST request to create an enterprise resource
+Post-ReSTRequest $SiteUrl "ProjectServer/EnterpriseResources/Add" $body
+
+# ReST request to add an enterprise resource
+Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/ProjectResources/AddEnterpriseResourceById('$enterprise_resourceid')"
 
 # Assignment parameters as JSON payload
 $body = "{
@@ -61,7 +78,19 @@ $body = "{
 	}
 }"
 
-# ReST request to create an assignment
+# ReST request to create an assignment for the local resource
+Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/Assignments/Add" $body
+
+# Assignment parameters as JSON payload
+$body = "{
+	'parameters': {
+		'ResourceId': '$enterprise_resourceid',
+		'TaskId': '$taskid',
+		'Notes': 'Created from PowerShell using REST API'
+	}
+}"
+
+# ReST request to create an assignment for the enterprise resource
 Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/Assignments/Add" $body
 
 # ReST request to publish and check-in the project
