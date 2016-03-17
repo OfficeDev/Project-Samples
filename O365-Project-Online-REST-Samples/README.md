@@ -19,10 +19,8 @@ This sample runs ReST API methods that create, read, update, or delete data. Whe
 ## Questions and comments
 
 ## Additional resources
-* [PS namespace (ps.js)] (https://msdn.microsoft.com/en-us/library/office/jj669820.aspx)
-* [Client-side object model (CSOM) for Project 2013] (https://msdn.microsoft.com/en-us/library/office/jj163123.aspx)
 * [JavaScript library and REST reference for Project Server 2013] (https://msdn.microsoft.com/en-us/library/office/jj712612.aspx)
-* [SharePoint Online SDK] (https://www.microsoft.com/en-us/download/details.aspx?id=42038)
+* [SharePoint and Project Online SDK] (https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM)
 
 ## Copyright
 Copyright (c) 2016 Microsoft. All rights reserved.
