@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{209DA642-21FB-4FFC-9FF6-6E8E5AC3155E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjToolV2</RootNamespace>
+    <AssemblyName>ProjToolV2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ProjToolV2.ServerMain</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Project.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Manage\ProjectOwner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\ProjectOwner.Designer.cs">
+      <DependentUpon>ProjectOwner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppSettings.Designer.cs">
+      <DependentUpon>AppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Update\ProjectUpdater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Update\ProjectUpdater.Designer.cs">
+      <DependentUpon>ProjectUpdater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\BackgroundWorkerBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilities\LogUtility.cs" />
+    <Compile Include="Manage\ProjectTeamBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\ProjectTeamBuilder.Designer.cs">
+      <DependentUpon>ProjectTeamBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\CheckInCheckOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\CheckInCheckOut.Designer.cs">
+      <DependentUpon>CheckInCheckOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ProjectsPublish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\ProjectsPublish.Designer.cs">
+      <DependentUpon>ProjectsPublish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ServerObjectsDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\ServerObjectsDelete.Designer.cs">
+      <DependentUpon>ServerObjectsDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\BackgroundExecutorWithStatus.cs" />
+    <Compile Include="Creation\CustomFieldsCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\CustomFieldsCreation.Designer.cs">
+      <DependentUpon>CustomFieldsCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginPage.Designer.cs">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\LookupTablesCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\LookupTablesCreation.Designer.cs">
+      <DependentUpon>LookupTablesCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\ProjectsCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\ProjectsCreation.Designer.cs">
+      <DependentUpon>ProjectsCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\CsomBase.cs" />
+    <Compile Include="Creation\ResourcesCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\ResourcesCreation.Designer.cs">
+      <DependentUpon>ResourcesCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerMain.Designer.cs">
+      <DependentUpon>ServerMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\CsomHelper.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <EmbeddedResource Include="Creation\CustomFieldsCreation.resx">
+      <DependentUpon>CustomFieldsCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginPage.resx">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creation\LookupTablesCreation.resx">
+      <DependentUpon>LookupTablesCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creation\ProjectsCreation.resx">
+      <DependentUpon>ProjectsCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage\ProjectOwner.resx">
+      <DependentUpon>ProjectOwner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage\ProjectTeamBuilder.resx">
+      <DependentUpon>ProjectTeamBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage\CheckInCheckOut.resx">
+      <DependentUpon>CheckInCheckOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage\ProjectsPublish.resx">
+      <DependentUpon>ProjectsPublish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage\ServerObjectsDelete.resx">
+      <DependentUpon>ServerObjectsDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Creation\ResourcesCreation.resx">
+      <DependentUpon>ResourcesCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerMain.resx">
+      <DependentUpon>ServerMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppSettings.resx">
+      <DependentUpon>AppSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Update\ProjectUpdater.resx">
+      <DependentUpon>ProjectUpdater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\project.ico" />
+    <Content Include="Images\logs.png" />
+    <Content Include="Images\popout.png" />
+    <Content Include="Images\refresh.png" />
+    <Content Include="Images\settings.png" />
+    <Content Include="Project.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
