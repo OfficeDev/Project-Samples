@@ -1,0 +1,11 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="SQL Database"
+  DTS:DTSID="{F049D764-CBA8-4521-8090-E24A87C9D93E}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=somedatabase.example.com;User ID=databaseUser;Initial Catalog=DestinationDB;Provider=SQLNCLI11.1;Auto Translate=False;">
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

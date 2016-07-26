@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="OData Source"
+  DTS:DTSID="{82229875-4DF0-455C-BB79-0A85C94169C4}"
+  DTS:CreationName="ODATA">
+  <DTS:ObjectData>
+    <ODataConnectionManager
+      UserName="user@example.com"
+      Url="https://example.sharepoint.com/sites/pwa/_api/projectdata/"
+      ConnectionString="Service Document Url=https://example.sharepoint.com/sites/pwa/_api/projectdata/;Include Atom Elements=Auto;Include Expanded Entities=False;Integrated Security=False;User ID=user@example.com;Persist Security Info=False;Time Out=60;Schema Sample Size=25;Retry Count=3;Retry Sleep=5;Keep Alive=False;Max Received Message Size=4398046511104"
+      MicrosoftOnlineServicesAuth="True">
+    </ODataConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

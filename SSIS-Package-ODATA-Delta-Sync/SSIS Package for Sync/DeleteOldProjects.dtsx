@@ -1,0 +1,2824 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/17/2016 10:19:36 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName=""
+  DTS:CreatorName="Microsoft Corporation"
+  DTS:DTSID="{9EAFCCD9-0472-43AE-97B9-81B537FB08E8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DeleteOldProjects"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{E97389F2-21FF-4A1A-9979-FC704A29D76F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{56CDADA7-E8A8-4B90-A9E2-973512FD78D9}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\t-dasad\Desktop\output.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProjectId"
+              DTS:DTSID="{DB8C008F-7505-4A7A-8BB0-AD983E7AF562}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProjectId (1)"
+              DTS:DTSID="{F833A24E-702D-4461-A2FE-E3ABEDDA4FF1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="303"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EnterpriseProjectTypeDescription"
+              DTS:DTSID="{D8D19266-4307-46AC-A92A-3211159EB901}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="303"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EnterpriseProjectTypeDescription (1)"
+              DTS:DTSID="{C80AD519-E987-4FC8-BD1B-180942BACA17}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{09FEF1AF-2CA4-473C-B413-EB558F8B43F5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EachProject_CurrentProjectID">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{71874DBB-157E-4943-80E0-7C24FB615A96}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDeletedProjects">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create stored procedure to delete projects"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{9B363D74-3304-47D9-94B4-250AD68FC51B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create stored procedure to delete projects"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F049D764-CBA8-4521-8090-E24A87C9D93E}"
+          SQLTask:SqlStatementSource="IF (OBJECT_ID('dbo.deleteProject') IS NOT NULL)&#xA;  DROP PROCEDURE dbo.deleteProject&#xA;GO&#xA;&#xA;&#xA;CREATE PROCEDURE dbo.deleteProject&#xA;   @ProjectUID [uniqueidentifier]&#xA;AS &#xA;&#xA;   -- Assignments&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Assignments'))&#xA;   BEGIN&#xA;       DELETE FROM Assignments WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'AssignmentByDay'))&#xA;   BEGIN&#xA;       DELETE FROM AssignmentByDay WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'AssignmentBaseline'))&#xA;   BEGIN&#xA;       DELETE FROM AssignmentBaseline WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'AssignmentBaselineByDay'))&#xA;   BEGIN&#xA;       DELETE FROM AssignmentBaselineByDay WHERE ProjectId = @ProjectUID&#xA;   END&#xA;&#xA;   -- Tasks&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Task'))&#xA;   BEGIN&#xA;       DELETE FROM Task  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'TaskByDay'))&#xA;   BEGIN&#xA;       DELETE FROM TaskByDay  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'TaskBaseline'))&#xA;   BEGIN&#xA;       DELETE FROM TaskBaseline  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'TaskBaselineByDay'))&#xA;   BEGIN&#xA;       DELETE FROM TaskBaselineByDay  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;&#xA;      -- This tables are independent, nevertheless erased here.  &#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Deliverables'))&#xA;   BEGIN&#xA;       DELETE FROM Deliverables  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Risks'))&#xA;   BEGIN&#xA;       DELETE FROM Risks  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Issues'))&#xA;   BEGIN&#xA;       DELETE FROM Issues  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'ProjectWorkflowStageDataSet'))&#xA;   BEGIN&#xA;       DELETE FROM ProjectWorkflowStageDataSet  WHERE ProjectId = @ProjectUID&#xA;   END&#xA;   IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'Deliverables'))&#xA;   BEGIN&#xA;       DELETE FROM Deliverables  WHERE ProjectId = @ProjectUID&#xA;   END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3B90D68B-2559-4CB5-A933-5B21A38B9865}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{1B29AE27-40B5-42B0-96CE-49E15D615B5F}"
+        DTS:ObjectName="{1B29AE27-40B5-42B0-96CE-49E15D615B5F}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::vDeletedProjects" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Execute procedure with current project ID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E003C71C-248D-44D2-8851-A79B0AACAA16}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute procedure with current project ID"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"EXEC dbo.deleteProject @ProjectUID = '"+@[User::EachProject_CurrentProjectID]+"' 
+GO  "</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F049D764-CBA8-4521-8090-E24A87C9D93E}"
+              SQLTask:SqlStatementSource="EXEC dbo.deleteProject @ProjectUID = '' &#xA;GO  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{453A5CA6-0D83-4385-929D-A50893F1FB20}"
+          DTS:ObjectName="{453A5CA6-0D83-4385-929D-A50893F1FB20}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::EachProject_CurrentProjectID" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Deleted Projects"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9C1BE949-D67A-4D8E-A093-55F9D12B3AFF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Deleted Projects"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get Deleted Projects\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId]" />
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input].Columns[ProjectId (1)]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId (1)"
+                      lineageId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId (1)]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Conditional Split.Outputs[Deleted]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Deleted"
+                  synchronousInputId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId]}) &amp;&amp; ![ISNULL](#{Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId (1)]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(ProjectId) &amp;&amp; !ISNULL([ProjectId (1)])</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Get Projects ODATA"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="OData Source Component;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Read data from OData services"
+              name="Get Projects ODATA"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Name of the collection to be retrieved from the service."
+                  expressionType="Notify"
+                  name="CollectionName">Projects</property>
+                <property
+                  dataType="System.Int32"
+                  description="The default maximum length for a string that has no maxlength specified in the schema."
+                  name="DefaultStringLength">4000</property>
+                <property
+                  dataType="System.String"
+                  description="Query in the url. "
+                  expressionType="Notify"
+                  name="Query">$format=json</property>
+                <property
+                  dataType="System.String"
+                  description="Resource path of the collection to be retrieved from the service."
+                  expressionType="Notify"
+                  name="ResourcePath"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="When set to true, use the resource path as requested collection; otherwise, use the collection name."
+                  expressionType="Notify"
+                  name="UseResourcePath">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.OData</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Deleted Projects\Get Projects ODATA.Connections[Connection]"
+                  connectionManagerID="{82229875-4DF0-455C-BB79-0A85C94169C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OData Source]"
+                  description="Connection to OData Service"
+                  name="Connection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].Columns[ProjectId]"
+                      dataType="guid"
+                      externalMetadataColumnId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectId]"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].Columns[ProjectId]"
+                      name="ProjectId" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectId]"
+                      dataType="guid"
+                      name="ProjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[EnterpriseProjectTypeDescription]"
+                      dataType="nText"
+                      name="EnterpriseProjectTypeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[EnterpriseProjectTypeId]"
+                      dataType="guid"
+                      name="EnterpriseProjectTypeId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[EnterpriseProjectTypeIsDefault]"
+                      dataType="bool"
+                      name="EnterpriseProjectTypeIsDefault" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[EnterpriseProjectTypeName]"
+                      dataType="nText"
+                      name="EnterpriseProjectTypeName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerCommitDate]"
+                      dataType="dbTimeStamp"
+                      name="OptimizerCommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      name="OptimizerDecisionAliasLookupTableId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      name="OptimizerDecisionAliasLookupTableValueId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerDecisionID]"
+                      dataType="ui1"
+                      name="OptimizerDecisionID" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerDecisionName]"
+                      dataType="nText"
+                      name="OptimizerDecisionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[OptimizerSolutionName]"
+                      dataType="nText"
+                      name="OptimizerSolutionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ParentProjectId]"
+                      dataType="guid"
+                      name="ParentProjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerCommitDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerCommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      name="PlannerDecisionAliasLookupTableId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      name="PlannerDecisionAliasLookupTableValueId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerDecisionID]"
+                      dataType="ui1"
+                      name="PlannerDecisionID" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerDecisionName]"
+                      dataType="nText"
+                      name="PlannerDecisionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerEndDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerSolutionName]"
+                      dataType="nText"
+                      name="PlannerSolutionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[PlannerStartDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualCost]"
+                      dataType="numeric"
+                      name="ProjectActualCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualDuration]"
+                      dataType="numeric"
+                      name="ProjectActualDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualFinishDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectActualFinishDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectActualOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectActualOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualRegularCost]"
+                      dataType="numeric"
+                      name="ProjectActualRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualRegularWork]"
+                      dataType="numeric"
+                      name="ProjectActualRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectActualStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectActualWork]"
+                      dataType="numeric"
+                      name="ProjectActualWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectACWP]"
+                      dataType="numeric"
+                      name="ProjectACWP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectAuthorName]"
+                      dataType="nText"
+                      name="ProjectAuthorName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectBCWP]"
+                      dataType="numeric"
+                      name="ProjectBCWP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectBCWS]"
+                      dataType="numeric"
+                      name="ProjectBCWS"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectBudgetCost]"
+                      dataType="numeric"
+                      name="ProjectBudgetCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectBudgetWork]"
+                      dataType="numeric"
+                      name="ProjectBudgetWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCalculationsAreStale]"
+                      dataType="bool"
+                      name="ProjectCalculationsAreStale" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCalendarDuration]"
+                      dataType="i4"
+                      name="ProjectCalendarDuration" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCategoryName]"
+                      dataType="nText"
+                      name="ProjectCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCompanyName]"
+                      dataType="nText"
+                      name="ProjectCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCost]"
+                      dataType="numeric"
+                      name="ProjectCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCostVariance]"
+                      dataType="numeric"
+                      name="ProjectCostVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCPI]"
+                      dataType="numeric"
+                      name="ProjectCPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCurrency]"
+                      dataType="nText"
+                      name="ProjectCurrency" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCV]"
+                      dataType="numeric"
+                      name="ProjectCV"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectCVP]"
+                      dataType="numeric"
+                      name="ProjectCVP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectDescription]"
+                      dataType="nText"
+                      name="ProjectDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectDuration]"
+                      dataType="numeric"
+                      name="ProjectDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectDurationVariance]"
+                      dataType="numeric"
+                      name="ProjectDurationVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectEAC]"
+                      dataType="numeric"
+                      name="ProjectEAC"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectEarlyFinish]"
+                      dataType="dbTimeStamp"
+                      name="ProjectEarlyFinish" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectEarlyStart]"
+                      dataType="dbTimeStamp"
+                      name="ProjectEarlyStart" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectEarnedValueIsStale]"
+                      dataType="bool"
+                      name="ProjectEarnedValueIsStale" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectEnterpriseFeatures]"
+                      dataType="bool"
+                      name="ProjectEnterpriseFeatures" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectFinishDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectFinishDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectFinishVariance]"
+                      dataType="numeric"
+                      name="ProjectFinishVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectFixedCost]"
+                      dataType="numeric"
+                      name="ProjectFixedCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectIdentifier]"
+                      dataType="nText"
+                      name="ProjectIdentifier" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectKeywords]"
+                      dataType="nText"
+                      name="ProjectKeywords" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectLateFinish]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLateFinish" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectLateStart]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLateStart" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectLastPublishedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLastPublishedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectManagerName]"
+                      dataType="nText"
+                      name="ProjectManagerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectName]"
+                      dataType="nText"
+                      name="ProjectName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectOwnerId]"
+                      dataType="guid"
+                      name="ProjectOwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectOwnerName]"
+                      dataType="nText"
+                      name="ProjectOwnerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectPercentCompleted]"
+                      dataType="i2"
+                      name="ProjectPercentCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectPercentWorkCompleted]"
+                      dataType="i2"
+                      name="ProjectPercentWorkCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRegularCost]"
+                      dataType="numeric"
+                      name="ProjectRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRegularWork]"
+                      dataType="numeric"
+                      name="ProjectRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingDuration]"
+                      dataType="numeric"
+                      name="ProjectRemainingDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingRegularCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingRegularWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectRemainingWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectResourcePlanWork]"
+                      dataType="numeric"
+                      name="ProjectResourcePlanWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectSPI]"
+                      dataType="numeric"
+                      name="ProjectSPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectStartVariance]"
+                      dataType="numeric"
+                      name="ProjectStartVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectStatusDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectStatusDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectSubject]"
+                      dataType="nText"
+                      name="ProjectSubject" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectSV]"
+                      dataType="numeric"
+                      name="ProjectSV"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectSVP]"
+                      dataType="numeric"
+                      name="ProjectSVP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectTCPI]"
+                      dataType="numeric"
+                      name="ProjectTCPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectTitle]"
+                      dataType="nText"
+                      name="ProjectTitle" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectType]"
+                      dataType="i4"
+                      name="ProjectType" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectVAC]"
+                      dataType="numeric"
+                      name="ProjectVAC"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectWork]"
+                      dataType="numeric"
+                      name="ProjectWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectWorkspaceInternalUrl]"
+                      dataType="nText"
+                      name="ProjectWorkspaceInternalUrl" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectWorkVariance]"
+                      dataType="numeric"
+                      name="ProjectWorkVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ResourcePlanUtilizationDate]"
+                      dataType="dbTimeStamp"
+                      name="ResourcePlanUtilizationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ResourcePlanUtilizationType]"
+                      dataType="i2"
+                      name="ResourcePlanUtilizationType" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectDepartments]"
+                      dataType="nText"
+                      name="ProjectDepartments" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[City]"
+                      dataType="nText"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[Country]"
+                      dataType="nText"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[IssuesRating]"
+                      dataType="nText"
+                      name="IssuesRating" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[Justification]"
+                      dataType="nText"
+                      name="Justification" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ProjectHealth]"
+                      dataType="nText"
+                      name="ProjectHealth" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[Region]"
+                      dataType="nText"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[RiskRating]"
+                      dataType="nText"
+                      name="RiskRating" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[ROI]"
+                      dataType="numeric"
+                      name="ROI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[TotalBenefits]"
+                      dataType="numeric"
+                      name="TotalBenefits"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].ExternalColumns[TotalCost]"
+                      dataType="numeric"
+                      name="TotalCost"
+                      precision="38"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectId]"
+                      name="ProjectId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeDescription]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeDescription]"
+                      name="EnterpriseProjectTypeDescription" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeId]"
+                      name="EnterpriseProjectTypeId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeIsDefault]"
+                      dataType="bool"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeIsDefault]"
+                      name="EnterpriseProjectTypeIsDefault" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[EnterpriseProjectTypeName]"
+                      name="EnterpriseProjectTypeName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerCommitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerCommitDate]"
+                      name="OptimizerCommitDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionAliasLookupTableId]"
+                      name="OptimizerDecisionAliasLookupTableId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionAliasLookupTableValueId]"
+                      name="OptimizerDecisionAliasLookupTableValueId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionID]"
+                      dataType="ui1"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionID]"
+                      name="OptimizerDecisionID" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerDecisionName]"
+                      name="OptimizerDecisionName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerSolutionName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[OptimizerSolutionName]"
+                      name="OptimizerSolutionName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ParentProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ParentProjectId]"
+                      name="ParentProjectId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerCommitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerCommitDate]"
+                      name="PlannerCommitDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionAliasLookupTableId]"
+                      name="PlannerDecisionAliasLookupTableId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionAliasLookupTableValueId]"
+                      name="PlannerDecisionAliasLookupTableValueId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionID]"
+                      dataType="ui1"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionID]"
+                      name="PlannerDecisionID" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerDecisionName]"
+                      name="PlannerDecisionName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerEndDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerEndDate]"
+                      name="PlannerEndDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerSolutionName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerSolutionName]"
+                      name="PlannerSolutionName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerStartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[PlannerStartDate]"
+                      name="PlannerStartDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualCost]"
+                      name="ProjectActualCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualDuration]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualDuration]"
+                      name="ProjectActualDuration"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualFinishDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualFinishDate]"
+                      name="ProjectActualFinishDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualOvertimeCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualOvertimeCost]"
+                      name="ProjectActualOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualOvertimeWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualOvertimeWork]"
+                      name="ProjectActualOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualRegularCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualRegularCost]"
+                      name="ProjectActualRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualRegularWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualRegularWork]"
+                      name="ProjectActualRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualStartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualStartDate]"
+                      name="ProjectActualStartDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectActualWork]"
+                      name="ProjectActualWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectACWP]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectACWP]"
+                      name="ProjectACWP"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectAuthorName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectAuthorName]"
+                      name="ProjectAuthorName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBCWP]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBCWP]"
+                      name="ProjectBCWP"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBCWS]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBCWS]"
+                      name="ProjectBCWS"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBudgetCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBudgetCost]"
+                      name="ProjectBudgetCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBudgetWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectBudgetWork]"
+                      name="ProjectBudgetWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCalculationsAreStale]"
+                      dataType="bool"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCalculationsAreStale]"
+                      name="ProjectCalculationsAreStale" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCalendarDuration]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCalendarDuration]"
+                      name="ProjectCalendarDuration" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCategoryName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCategoryName]"
+                      name="ProjectCategoryName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCompanyName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCompanyName]"
+                      name="ProjectCompanyName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCost]"
+                      name="ProjectCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCostVariance]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCostVariance]"
+                      name="ProjectCostVariance"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCPI]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCPI]"
+                      name="ProjectCPI"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCreatedDate]"
+                      name="ProjectCreatedDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCurrency]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCurrency]"
+                      name="ProjectCurrency" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCV]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCV]"
+                      name="ProjectCV"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCVP]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectCVP]"
+                      name="ProjectCVP"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDescription]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDescription]"
+                      name="ProjectDescription" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDuration]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDuration]"
+                      name="ProjectDuration"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDurationVariance]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDurationVariance]"
+                      name="ProjectDurationVariance"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEAC]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEAC]"
+                      name="ProjectEAC"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarlyFinish]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarlyFinish]"
+                      name="ProjectEarlyFinish" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarlyStart]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarlyStart]"
+                      name="ProjectEarlyStart" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarnedValueIsStale]"
+                      dataType="bool"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEarnedValueIsStale]"
+                      name="ProjectEarnedValueIsStale" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEnterpriseFeatures]"
+                      dataType="bool"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectEnterpriseFeatures]"
+                      name="ProjectEnterpriseFeatures" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFinishDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFinishDate]"
+                      name="ProjectFinishDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFinishVariance]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFinishVariance]"
+                      name="ProjectFinishVariance"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFixedCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectFixedCost]"
+                      name="ProjectFixedCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectIdentifier]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectIdentifier]"
+                      name="ProjectIdentifier" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectKeywords]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectKeywords]"
+                      name="ProjectKeywords" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLateFinish]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLateFinish]"
+                      name="ProjectLateFinish" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLateStart]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLateStart]"
+                      name="ProjectLateStart" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLastPublishedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectLastPublishedDate]"
+                      name="ProjectLastPublishedDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectManagerName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectManagerName]"
+                      name="ProjectManagerName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectModifiedDate]"
+                      name="ProjectModifiedDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectName]"
+                      name="ProjectName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOvertimeCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOvertimeCost]"
+                      name="ProjectOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOvertimeWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOvertimeWork]"
+                      name="ProjectOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOwnerId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOwnerId]"
+                      name="ProjectOwnerId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOwnerName]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectOwnerName]"
+                      name="ProjectOwnerName" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectPercentCompleted]"
+                      dataType="i2"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectPercentCompleted]"
+                      name="ProjectPercentCompleted" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectPercentWorkCompleted]"
+                      dataType="i2"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectPercentWorkCompleted]"
+                      name="ProjectPercentWorkCompleted" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRegularCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRegularCost]"
+                      name="ProjectRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRegularWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRegularWork]"
+                      name="ProjectRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingCost]"
+                      name="ProjectRemainingCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingDuration]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingDuration]"
+                      name="ProjectRemainingDuration"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingOvertimeCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingOvertimeCost]"
+                      name="ProjectRemainingOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingOvertimeWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingOvertimeWork]"
+                      name="ProjectRemainingOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingRegularCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingRegularCost]"
+                      name="ProjectRemainingRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingRegularWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingRegularWork]"
+                      name="ProjectRemainingRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectRemainingWork]"
+                      name="ProjectRemainingWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectResourcePlanWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectResourcePlanWork]"
+                      name="ProjectResourcePlanWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSPI]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSPI]"
+                      name="ProjectSPI"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStartDate]"
+                      name="ProjectStartDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStartVariance]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStartVariance]"
+                      name="ProjectStartVariance"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStatusDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectStatusDate]"
+                      name="ProjectStatusDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSubject]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSubject]"
+                      name="ProjectSubject" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSV]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSV]"
+                      name="ProjectSV"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSVP]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectSVP]"
+                      name="ProjectSVP"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectTCPI]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectTCPI]"
+                      name="ProjectTCPI"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectTitle]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectTitle]"
+                      name="ProjectTitle" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectType]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectType]"
+                      name="ProjectType" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectVAC]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectVAC]"
+                      name="ProjectVAC"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWork]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWork]"
+                      name="ProjectWork"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWorkspaceInternalUrl]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWorkspaceInternalUrl]"
+                      name="ProjectWorkspaceInternalUrl" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWorkVariance]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectWorkVariance]"
+                      name="ProjectWorkVariance"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ResourcePlanUtilizationDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ResourcePlanUtilizationDate]"
+                      name="ResourcePlanUtilizationDate" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ResourcePlanUtilizationType]"
+                      dataType="i2"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ResourcePlanUtilizationType]"
+                      name="ResourcePlanUtilizationType" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDepartments]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectDepartments]"
+                      name="ProjectDepartments" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[City]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Country]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[IssuesRating]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[IssuesRating]"
+                      name="IssuesRating" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Justification]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Justification]"
+                      name="Justification" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectHealth]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ProjectHealth]"
+                      name="ProjectHealth" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Region]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[RiskRating]"
+                      dataType="nText"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[RiskRating]"
+                      name="RiskRating" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ROI]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[ROI]"
+                      name="ROI"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[TotalBenefits]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[TotalBenefits]"
+                      name="TotalBenefits"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[TotalCost]"
+                      dataType="numeric"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Error output].Columns[TotalCost]"
+                      name="TotalCost"
+                      precision="38"
+                      scale="4" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Local Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Local Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Deleted Projects\Local Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Local Sort.Inputs[Sort Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      lineageId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].Columns[ProjectId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Local Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Local Sort.Outputs[Sort Output].Columns[ProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Local Sort.Outputs[Sort Output].Columns[ProjectId]"
+                      name="ProjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].Columns[ProjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Left Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Get Deleted Projects\Remote Sort.Outputs[Sort Output].Columns[ProjectId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Right Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Get Deleted Projects\Local Sort.Outputs[Sort Output].Columns[ProjectId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId]"
+                      name="ProjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Left Input].Columns[ProjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId (1)]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId (1)]"
+                      name="ProjectId (1)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Right Input].Columns[ProjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Projects Local DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Projects Local DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Projects]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Deleted Projects\Projects Local DB.Connections[OleDbConnection]"
+                  connectionManagerID="{F049D764-CBA8-4521-8090-E24A87C9D93E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL Database]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].Columns[ProjectId]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectId]"
+                      lineageId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].Columns[ProjectId]"
+                      name="ProjectId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectId]"
+                      dataType="guid"
+                      name="ProjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[EnterpriseProjectTypeDescription]"
+                      dataType="nText"
+                      name="EnterpriseProjectTypeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[EnterpriseProjectTypeId]"
+                      dataType="guid"
+                      name="EnterpriseProjectTypeId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[EnterpriseProjectTypeIsDefault]"
+                      dataType="bool"
+                      name="EnterpriseProjectTypeIsDefault" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[EnterpriseProjectTypeName]"
+                      dataType="nText"
+                      name="EnterpriseProjectTypeName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerCommitDate]"
+                      dataType="dbTimeStamp"
+                      name="OptimizerCommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      name="OptimizerDecisionAliasLookupTableId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      name="OptimizerDecisionAliasLookupTableValueId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerDecisionID]"
+                      dataType="ui1"
+                      name="OptimizerDecisionID" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerDecisionName]"
+                      dataType="nText"
+                      name="OptimizerDecisionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[OptimizerSolutionName]"
+                      dataType="nText"
+                      name="OptimizerSolutionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ParentProjectId]"
+                      dataType="guid"
+                      name="ParentProjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerCommitDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerCommitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerDecisionAliasLookupTableId]"
+                      dataType="guid"
+                      name="PlannerDecisionAliasLookupTableId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerDecisionAliasLookupTableValueId]"
+                      dataType="guid"
+                      name="PlannerDecisionAliasLookupTableValueId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerDecisionID]"
+                      dataType="ui1"
+                      name="PlannerDecisionID" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerDecisionName]"
+                      dataType="nText"
+                      name="PlannerDecisionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerEndDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerSolutionName]"
+                      dataType="nText"
+                      name="PlannerSolutionName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[PlannerStartDate]"
+                      dataType="dbTimeStamp"
+                      name="PlannerStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualCost]"
+                      dataType="numeric"
+                      name="ProjectActualCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualDuration]"
+                      dataType="numeric"
+                      name="ProjectActualDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualFinishDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectActualFinishDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectActualOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectActualOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualRegularCost]"
+                      dataType="numeric"
+                      name="ProjectActualRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualRegularWork]"
+                      dataType="numeric"
+                      name="ProjectActualRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectActualStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectActualWork]"
+                      dataType="numeric"
+                      name="ProjectActualWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectACWP]"
+                      dataType="numeric"
+                      name="ProjectACWP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectAuthorName]"
+                      dataType="nText"
+                      name="ProjectAuthorName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectBCWP]"
+                      dataType="numeric"
+                      name="ProjectBCWP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectBCWS]"
+                      dataType="numeric"
+                      name="ProjectBCWS"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectBudgetCost]"
+                      dataType="numeric"
+                      name="ProjectBudgetCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectBudgetWork]"
+                      dataType="numeric"
+                      name="ProjectBudgetWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCalculationsAreStale]"
+                      dataType="bool"
+                      name="ProjectCalculationsAreStale" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCalendarDuration]"
+                      dataType="i4"
+                      name="ProjectCalendarDuration" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCategoryName]"
+                      dataType="nText"
+                      name="ProjectCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCompanyName]"
+                      dataType="nText"
+                      name="ProjectCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCost]"
+                      dataType="numeric"
+                      name="ProjectCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCostVariance]"
+                      dataType="numeric"
+                      name="ProjectCostVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCPI]"
+                      dataType="numeric"
+                      name="ProjectCPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCurrency]"
+                      dataType="nText"
+                      name="ProjectCurrency" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCV]"
+                      dataType="numeric"
+                      name="ProjectCV"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectCVP]"
+                      dataType="numeric"
+                      name="ProjectCVP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectDescription]"
+                      dataType="nText"
+                      name="ProjectDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectDuration]"
+                      dataType="numeric"
+                      name="ProjectDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectDurationVariance]"
+                      dataType="numeric"
+                      name="ProjectDurationVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectEAC]"
+                      dataType="numeric"
+                      name="ProjectEAC"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectEarlyFinish]"
+                      dataType="dbTimeStamp"
+                      name="ProjectEarlyFinish" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectEarlyStart]"
+                      dataType="dbTimeStamp"
+                      name="ProjectEarlyStart" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectEarnedValueIsStale]"
+                      dataType="bool"
+                      name="ProjectEarnedValueIsStale" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectEnterpriseFeatures]"
+                      dataType="bool"
+                      name="ProjectEnterpriseFeatures" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectFinishDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectFinishDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectFinishVariance]"
+                      dataType="numeric"
+                      name="ProjectFinishVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectFixedCost]"
+                      dataType="numeric"
+                      name="ProjectFixedCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectIdentifier]"
+                      dataType="nText"
+                      name="ProjectIdentifier" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectKeywords]"
+                      dataType="nText"
+                      name="ProjectKeywords" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectLateFinish]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLateFinish" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectLateStart]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLateStart" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectLastPublishedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectLastPublishedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectManagerName]"
+                      dataType="nText"
+                      name="ProjectManagerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectName]"
+                      dataType="nText"
+                      name="ProjectName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectOwnerId]"
+                      dataType="guid"
+                      name="ProjectOwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectOwnerName]"
+                      dataType="nText"
+                      name="ProjectOwnerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectPercentCompleted]"
+                      dataType="i2"
+                      name="ProjectPercentCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectPercentWorkCompleted]"
+                      dataType="i2"
+                      name="ProjectPercentWorkCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRegularCost]"
+                      dataType="numeric"
+                      name="ProjectRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRegularWork]"
+                      dataType="numeric"
+                      name="ProjectRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingDuration]"
+                      dataType="numeric"
+                      name="ProjectRemainingDuration"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingOvertimeCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingOvertimeCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingOvertimeWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingOvertimeWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingRegularCost]"
+                      dataType="numeric"
+                      name="ProjectRemainingRegularCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingRegularWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingRegularWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectRemainingWork]"
+                      dataType="numeric"
+                      name="ProjectRemainingWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectResourcePlanWork]"
+                      dataType="numeric"
+                      name="ProjectResourcePlanWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectSPI]"
+                      dataType="numeric"
+                      name="ProjectSPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectStartDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectStartVariance]"
+                      dataType="numeric"
+                      name="ProjectStartVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectStatusDate]"
+                      dataType="dbTimeStamp"
+                      name="ProjectStatusDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectSubject]"
+                      dataType="nText"
+                      name="ProjectSubject" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectSV]"
+                      dataType="numeric"
+                      name="ProjectSV"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectSVP]"
+                      dataType="numeric"
+                      name="ProjectSVP"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectTCPI]"
+                      dataType="numeric"
+                      name="ProjectTCPI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectTitle]"
+                      dataType="nText"
+                      name="ProjectTitle" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectType]"
+                      dataType="i4"
+                      name="ProjectType" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectVAC]"
+                      dataType="numeric"
+                      name="ProjectVAC"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectWork]"
+                      dataType="numeric"
+                      name="ProjectWork"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectWorkspaceInternalUrl]"
+                      dataType="nText"
+                      name="ProjectWorkspaceInternalUrl" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectWorkVariance]"
+                      dataType="numeric"
+                      name="ProjectWorkVariance"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ResourcePlanUtilizationDate]"
+                      dataType="dbTimeStamp"
+                      name="ResourcePlanUtilizationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ResourcePlanUtilizationType]"
+                      dataType="i2"
+                      name="ResourcePlanUtilizationType" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectDepartments]"
+                      dataType="nText"
+                      name="ProjectDepartments" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="nText"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="nText"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[IssuesRating]"
+                      dataType="nText"
+                      name="IssuesRating" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[Justification]"
+                      dataType="nText"
+                      name="Justification" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ProjectHealth]"
+                      dataType="nText"
+                      name="ProjectHealth" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      dataType="nText"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[RiskRating]"
+                      dataType="nText"
+                      name="RiskRating" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ROI]"
+                      dataType="numeric"
+                      name="ROI"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[TotalBenefits]"
+                      dataType="numeric"
+                      name="TotalBenefits"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      dataType="numeric"
+                      name="TotalCost"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[DeliverableId]"
+                      dataType="guid"
+                      name="DeliverableId" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[CreateByResource]"
+                      dataType="nText"
+                      name="CreateByResource" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      dataType="nText"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[FinishDate]"
+                      dataType="dbTimeStamp"
+                      name="FinishDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[IsFolder]"
+                      dataType="bool"
+                      name="IsFolder" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ItemRelativeUrlPath]"
+                      dataType="nText"
+                      name="ItemRelativeUrlPath" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ModifiedByResource]"
+                      dataType="nText"
+                      name="ModifiedByResource" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[StartDate]"
+                      dataType="dbTimeStamp"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="nText"
+                      name="Title" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ProjectId]"
+                      name="ProjectId" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::vDeletedProjects</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Deleted Projects\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Recordset Destination.Inputs[Recordset Destination Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output].Columns[ProjectId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Get Deleted Projects\Remote Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Remote Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Deleted Projects\Remote Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Deleted Projects\Remote Sort.Inputs[Sort Input].Columns[ProjectId]"
+                      cachedDataType="guid"
+                      cachedName="ProjectId"
+                      lineageId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].Columns[ProjectId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Deleted Projects\Remote Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Deleted Projects\Remote Sort.Outputs[Sort Output].Columns[ProjectId]"
+                      dataType="guid"
+                      lineageId="Package\Get Deleted Projects\Remote Sort.Outputs[Sort Output].Columns[ProjectId]"
+                      name="ProjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output].Columns[ProjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get Deleted Projects.Paths[Deleted]"
+              endId="Package\Get Deleted Projects\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="Deleted"
+              startId="Package\Get Deleted Projects\Conditional Split.Outputs[Deleted]" />
+            <path
+              refId="Package\Get Deleted Projects.Paths[Merge Join Output]"
+              endId="Package\Get Deleted Projects\Conditional Split.Inputs[Conditional Split Input]"
+              name="Merge Join Output"
+              startId="Package\Get Deleted Projects\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Get Deleted Projects.Paths[OLE DB Source Output]"
+              endId="Package\Get Deleted Projects\Local Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get Deleted Projects\Projects Local DB.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Get Deleted Projects.Paths[Output]"
+              endId="Package\Get Deleted Projects\Remote Sort.Inputs[Sort Input]"
+              name="Output"
+              startId="Package\Get Deleted Projects\Get Projects ODATA.Outputs[Output]" />
+            <path
+              refId="Package\Get Deleted Projects.Paths[Sort Output]"
+              endId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\Get Deleted Projects\Remote Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Get Deleted Projects.Paths[Sort Output1]"
+              endId="Package\Get Deleted Projects\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\Get Deleted Projects\Local Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1FF916FD-284E-4243-9C68-9FDB88FEF284}"
+      DTS:From="Package\Create stored procedure to delete projects"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Deleted Projects" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{680DF520-B6FB-4A1A-B5C4-7BEAE1D805DB}"
+      DTS:From="Package\Get Deleted Projects"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="279,42"
+          Id="Package\Create stored procedure to delete projects"
+          TopLeft="451,101" />
+        <NodeLayout
+          Size="277,42"
+          Id="Package\Foreach Loop Container\Execute procedure with current project ID"
+          TopLeft="21,37" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="331,132"
+          Size="331,175"
+          Id="Package\Foreach Loop Container"
+          TopLeft="411,286" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Get Deleted Projects"
+          TopLeft="492,199" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="590.5,143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11,56"
+              Start="0,0"
+              End="-11,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="-4,28" />
+                  <mssgle:LineSegment
+                    End="-7,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7,28"
+                    Point2="-11,28"
+                    Point3="-11,32" />
+                  <mssgle:LineSegment
+                    End="-11,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="578,241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Remember to have a local project table&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="237,56"
+          Id="578f2517-fbb4-44bc-bad7-036b7f3a006c"
+          TopLeft="708,204" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get Deleted Projects">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Get Deleted Projects\Merge Join"
+          TopLeft="589,433" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Get Deleted Projects\Get Projects ODATA"
+          TopLeft="496,210" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Get Deleted Projects\Projects Local DB"
+          TopLeft="692,210" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Get Deleted Projects\Local Sort"
+          TopLeft="717,280" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Get Deleted Projects\Conditional Split"
+          TopLeft="627,505" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get Deleted Projects\Recordset Destination"
+          TopLeft="692,595" />
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Get Deleted Projects\Remote Sort"
+          TopLeft="517,282" />
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[Sort Output1]"
+          TopLeft="780,322">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-105.666666666667,111"
+              Start="0,0"
+              End="-105.666666666667,103.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.790273556231" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,61.790273556231"
+                    Point2="0,65.790273556231"
+                    Point3="-4,65.790273556231" />
+                  <mssgle:LineSegment
+                    End="-101.666666666667,65.790273556231" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-101.666666666667,65.790273556231"
+                    Point2="-105.666666666667,65.790273556231"
+                    Point3="-105.666666666667,69.790273556231" />
+                  <mssgle:LineSegment
+                    End="-105.666666666667,103.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[Sort Output]"
+          TopLeft="586,324">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.6666666666666,109"
+              Start="0,0"
+              End="47.6666666666666,101.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.6048632218845" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,60.6048632218845"
+                    Point2="0,64.6048632218845"
+                    Point3="4,64.6048632218845" />
+                  <mssgle:LineSegment
+                    End="43.6666666666666,64.6048632218845" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.6666666666666,64.6048632218845"
+                    Point2="47.6666666666666,64.6048632218845"
+                    Point3="47.6666666666666,68.6048632218845" />
+                  <mssgle:LineSegment
+                    End="47.6666666666666,101.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[Output]"
+          TopLeft="584.25,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[OLE DB Source Output]"
+          TopLeft="776.25,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[Merge Join Output]"
+          TopLeft="654,475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.5,30"
+              Start="0,0"
+              End="50.5,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11"
+                    Point2="0,15"
+                    Point3="4,15" />
+                  <mssgle:LineSegment
+                    End="46.5,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.5,15"
+                    Point2="50.5,15"
+                    Point3="50.5,19" />
+                  <mssgle:LineSegment
+                    End="50.5,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Deleted Projects.Paths[Deleted]"
+          TopLeft="704.5,547">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="78.5,48"
+              Start="0,0"
+              End="78.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="74.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="74.5,24"
+                    Point2="78.5,24"
+                    Point3="78.5,28" />
+                  <mssgle:LineSegment
+                    End="78.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="22.09201171875,29,34.3159765625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Deleted Projects\Projects Local DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
