@@ -18,7 +18,7 @@ As a team member, I want to be able to see my assignments and  quickly check the
 To use this code sample, you need the following:
 * Project Online
 * Visual Studio 2013 or later 
-* Project CSOM client DLL.  It is available as a Nuget Package from [here](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/)
+* Project CSOM client library.  It is available as a Nuget Package from [here](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM/)
 
 
 
