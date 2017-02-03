@@ -68,9 +68,8 @@ namespace ProjToolV2
                 s.Items.Clear();
             });
 
-            IEnumerable<PublishedProject> projectList =
-                ProjContext.LoadQuery(ProjContext.Projects.Include(p => p.Draft.Name, p => p.Draft, p => p.IsCheckedOut));
-            ProjContext.ExecuteQuery();
+            IEnumerable<PublishedProject> projectList = CsomHelper.LoadAllProjects(
+                p => p.Draft.Name, p => p.Draft, p => p.IsCheckedOut);
             Dictionary<string, PublishedProject> projList = new Dictionary<string, PublishedProject>
             {
                 {"Select a Project", null}
