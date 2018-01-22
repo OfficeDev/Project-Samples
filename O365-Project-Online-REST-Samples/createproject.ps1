@@ -1,3 +1,9 @@
+<#
+  Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+  See LICENSE in the project root for license information.
+#>
+
+
 # Creates a Project using ReST API
 param
 (
@@ -24,6 +30,19 @@ $body = "{
 # ReST request to create a project
 Post-ReSTRequest $SiteUrl "ProjectServer/Projects/Add" $body
 
+# Wait till new project is finally ready in SharepointOnline.
+While ($true)
+{
+    Start-Sleep -Seconds 1
+    Write-Host "Querying new project's readiness"
+    $result = Get-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')"
+    if ($result)
+    {
+        Write-Host "Project is ready"
+        break;
+    }
+}
+
 # ReST request to check out the project
 Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/checkOut" $null
 
@@ -35,12 +54,12 @@ $body = "{
 		'Name': 'Task_$taskid',
 		'Notes': 'Created from PowerShell using REST API',
 		'Start': '2016-01-04T08:00:00',
-		'Duration': '5d'        
+		'Duration': '5d'
 	}
 }"
 
 # ReST request to create a task
-Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Tasks/Add" $body
+Post-ReSTRequest $SiteUrl "ProjectServer/Projects('$projectid')/Draft/Tasks/Add" $body
 
 # Resource parameters as JSON payload
 $resourceid = [Guid]::NewGuid()
