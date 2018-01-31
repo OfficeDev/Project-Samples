@@ -1,0 +1,20 @@
+### YamlMime:Sample
+sample:
+- name: 'Project add-in: Office 365 Project Online JavaScript Code Sample'
+  path: O365-Project-Online-JavaScript-Samples
+  description: This Project Online JSOM code sample demonstrates how to create and update a project using JavaScript
+  readme: ''
+  generateZip: FALSE
+  isLive: TRUE
+  technologies:
+  - Office Add-in
+  azureDeploy: ''
+  author: NadinMerali
+  platforms: []
+  languages:
+  - JavaScript
+  extensions:
+    products:
+    - Project
+    - Office 365
+    scenarios: []
