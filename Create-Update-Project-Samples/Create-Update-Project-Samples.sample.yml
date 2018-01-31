@@ -1,0 +1,19 @@
+### YamlMime:Sample
+sample:
+- name: 'Project add-in: Create and Update Project .NET Code Samples'
+  path: Create-Update-Project-Samples
+  description: The create and update sample code demonstrates how to create and update a project using CSOM and .Net
+  readme: ''
+  generateZip: FALSE
+  isLive: TRUE
+  technologies:
+  - Office Add-in
+  azureDeploy: ''
+  author: superjijimouse
+  platforms: []
+  languages:
+  - C#
+  extensions:
+    products:
+    - Project
+    scenarios: []
