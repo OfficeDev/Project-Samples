@@ -1,0 +1,19 @@
+### YamlMime:Sample
+sample:
+- name: 'Project add-in: My Task Checklist'
+  path: My-Task-Checklist
+  description: The My Task Checklist sample code demonstrates how to query for assignments for the current user and to submit status updates (complete/incomplete) using C# CSOM. It also demonstrates how to authenticate against Project online without directly passing the credentials to the application.
+  readme: ''
+  generateZip: FALSE
+  isLive: TRUE
+  technologies:
+  - Office Add-in
+  azureDeploy: ''
+  author: NadinMerali
+  platforms: []
+  languages:
+  - C#
+  extensions:
+    products:
+    - Project
+    scenarios: []
