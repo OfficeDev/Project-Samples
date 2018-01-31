@@ -1,0 +1,19 @@
+### YamlMime:Sample
+sample:
+- name: 'Project add-in: Office 365 Project Online ReST Code Sample'
+  path: O365-Project-Online-REST-Samples
+  description: This Project Online ReST code sample demonstrates how to create and update a project using ReST API.
+  readme: ''
+  generateZip: FALSE
+  isLive: TRUE
+  technologies:
+  - Office Add-in
+  azureDeploy: ''
+  author: NadinMerali
+  platforms: []
+  languages:
+  - REST API
+  extensions:
+    products:
+    - Project
+    scenarios: []
