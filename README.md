@@ -1,3 +1,13 @@
+---
+topic: sample
+products:
+- Office 365
+languages:
+- C#
+extensions:
+  contentType: samples
+  createdDate: 11/23/2015 8:05:41 PM
+---
 # Project CSOM Samples
 
 
