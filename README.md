@@ -14,7 +14,7 @@ extensions:
 
 ## Samples
 * [365-Project-Online-OM-ProjToolV2](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/365-Project-Online-OM-ProjToolV2): UI tool that exercises CSOM to perform basic data manipulation on a pwa instance.
-* [O365-Project-Online-REST-Samples](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/O365-Project-Online-REST-Samples):How to create and update a project using REST API
+* [O365-Project-Online-REST-Samples](https://github.com/OfficeDev/Project-REST-Basic-Operations/tree/master/):How to create and update a project using REST API
 * [O365-Project-Online-JavaScript-Samples](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/O365-Project-Online-JavaScript-Samples): How to create and update a project using JSOM
 * [Copy-Work-Packages](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/Copy-Work-Packages): How to copy tasks from one project to another using JSOM
 * [Create-Update-Project-Samples](https://github.com/OfficeDev/O365-Project-Online-.Net-Samples/tree/master/Create-Update-Project-Samples) : How to create and update a project using CSOM and .Net
