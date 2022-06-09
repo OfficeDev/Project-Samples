@@ -447,8 +447,8 @@ namespace ProjToolV2
                 s.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             });
 
-            IEnumerable<PublishedProject> projectList = ProjContext.LoadQuery(ProjContext.Projects.Include(p => p.Name, p => p.Id, p => p.IsCheckedOut, p => p.Owner.LoginName, p => p.CheckedOutBy.LoginName, p => p.CheckedOutDate));
-            ProjContext.ExecuteQuery();
+            IEnumerable<PublishedProject> projectList = CsomHelper.LoadAllProjects(
+                p => p.Name, p => p.Id, p => p.IsCheckedOut, p => p.Owner.LoginName, p => p.CheckedOutBy.LoginName, p => p.CheckedOutDate);
 
             List<ListViewItem> listViewItems = new List<ListViewItem>();
             foreach (PublishedProject project in projectList)

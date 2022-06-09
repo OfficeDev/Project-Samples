@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace ProjToolV2
@@ -33,6 +34,57 @@ namespace ProjToolV2
             Log.WriteVerbose(new SourceInfo(), "Current user resource type:[{0}].",
                 CsomBase.CurrentResource.ResourceType);
             return CsomBase.CurrentResource.ResourceType == EnterpriseResourceType.Work;
+        }
+
+        const int PROJECT_BLOCK_SIZE = 20;
+
+        public static IEnumerable<PublishedProject> LoadAllProjects(params Expression<Func<PublishedProject, object>>[] retrievals)
+        {
+            // Due to limitaitons in the CSOM - only 20 projects can be loaded at a time.
+
+            // Based on code from Nadin Mirali in the Project Product Group at Microsoft
+            // https://www.yammer.com/itpronetwork/#/Threads/show?threadId=673325901
+
+            //Query for all the projects first
+            ProjContext.Load(ProjContext.Projects, proj => proj.Include(p => p.Id));
+            ProjContext.ExecuteQuery();
+            var allIds = ProjContext.Projects.Select(p => p.Id).ToArray();
+
+            IEnumerable<PublishedProject> result = null;
+
+            //get the number of blocks we will have
+            int numBlocks = allIds.Length / PROJECT_BLOCK_SIZE + 1;
+            //Query all the child objects in blocks of 20
+            for (int i = 0; i < numBlocks; i++)
+            {
+                var idBlock = allIds.Skip(i * PROJECT_BLOCK_SIZE).Take(PROJECT_BLOCK_SIZE);
+                Guid[] block = new Guid[PROJECT_BLOCK_SIZE];  //Zero'd Guid Array
+                Array.Copy(idBlock.ToArray(), block, idBlock.Count());
+
+                //some elements will be Zero'd guids at the end
+                var projectQuery = ProjContext.Projects.Where(p =>
+                    p.Id == block[0] || p.Id == block[1] ||
+                    p.Id == block[2] || p.Id == block[3] ||
+                    p.Id == block[4] || p.Id == block[5] ||
+                    p.Id == block[6] || p.Id == block[7] ||
+                    p.Id == block[8] || p.Id == block[9] ||
+                    p.Id == block[10] || p.Id == block[11] ||
+                    p.Id == block[12] || p.Id == block[13] ||
+                    p.Id == block[14] || p.Id == block[15] ||
+                    p.Id == block[16] || p.Id == block[17] ||
+                    p.Id == block[18] || p.Id == block[19]
+                    ).Include(retrievals);
+
+                var blockResult = ProjContext.LoadQuery(projectQuery);
+                ProjContext.ExecuteQuery();
+
+                if (result != null)
+                    result = result.Concat(blockResult);
+                else
+                    result = blockResult;
+            }
+
+            return result;
         }
 
         public static void ExecuteAndWait(QueueJob queueJob, TextBox textbox)

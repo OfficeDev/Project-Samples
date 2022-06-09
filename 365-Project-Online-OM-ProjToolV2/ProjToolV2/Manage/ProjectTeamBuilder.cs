@@ -90,10 +90,8 @@ namespace ProjToolV2
         private void GetDraftProjectsList()
         {
             LV_Projects.InvokeIfRequired(s => s.Items.Clear());
-            IEnumerable<PublishedProject> projectList =
-                ProjContext.LoadQuery(ProjContext.Projects.Include(p => p.Draft.Name, p => p.Draft.Id,
-                    p => p.IsCheckedOut));
-            ProjContext.ExecuteQuery();
+            IEnumerable<PublishedProject> projectList = CsomHelper.LoadAllProjects(
+                p => p.Draft.Name, p => p.Draft.Id, p => p.IsCheckedOut);
             PublishedProject[] publishedProjects = projectList.ToArray();
             List<ListViewItem> listViewItems = new List<ListViewItem>();
             foreach (PublishedProject project in publishedProjects)
