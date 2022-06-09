@@ -20,8 +20,7 @@ namespace ProjToolV2
 
         public static EnterpriseResource LoadMe()
         {
-            string currentUserName = UserPrincipal.Current.DisplayName;
-            Log.WriteVerbose(new SourceInfo(), "Loading current user:[{0}] info.", currentUserName);
+            Log.WriteVerbose(new SourceInfo(), "Loading current user info.");
             User user = ProjContext.Web.CurrentUser;
             IEnumerable<EnterpriseResource> resources =
                 ProjContext.LoadQuery(ProjContext.EnterpriseResources.Where(r => r.Name == user.Title).IncludeWithDefaultProperties(r => r.User));
