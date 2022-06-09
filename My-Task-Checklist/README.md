@@ -27,7 +27,7 @@ This sample runs CSOM methods that read assignment information for the logged in
 
 ## Additional resources
 * [Client-side object model (CSOM) for Project 2013](https://msdn.microsoft.com/en-us/library/office/jj163123.aspx)
-* [SharePoint and Project Online SDK] (https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM)
+* [SharePoint and Project Online SDK](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM)
 
 ## Copyright
 Copyright (c) 2016 Microsoft. All rights reserved.
