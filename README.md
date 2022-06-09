@@ -19,9 +19,9 @@ extensions:
 
 ## Additional resources
 
-* [PS namespace (ps.js)](https://docs.mcirosoft.com/previous-versions/office/project-javascript-api/jj669820(v=office.15))
-* [Client-side object model (CSOM) for Project 2013](https://docs.mcirosoft.com/office/client-developer/project/client-side-object-model-csom-for-project-2013)
-* [JavaScript library and REST reference for Project Server 2013](https://docs.mcirosoft.com/previous-versions/office/project-javascript-api/jj712612(v=office.15))
+* [PS namespace (ps.js)](https://docs.microsoft.com/previous-versions/office/project-javascript-api/jj669820(v=office.15))
+* [Client-side object model (CSOM) for Project 2013](https://docs.microsoft.com/office/client-developer/project/client-side-object-model-csom-for-project-2013)
+* [JavaScript library and REST reference for Project Server 2013](https://docs.microsoft.com/previous-versions/office/project-javascript-api/jj712612(v=office.15))
 * [SharePoint and Project Online SDK](https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM)
 
 ## Copyright
