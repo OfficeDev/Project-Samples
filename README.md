@@ -4,6 +4,7 @@ products:
 - office-365
 languages:
 - csharp
+description: "This sample repo includes six samples that show how to build solutions for Project Online."
 extensions:
   contentType: samples
 ---
